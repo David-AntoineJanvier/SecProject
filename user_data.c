@@ -105,5 +105,5 @@ void UD_getUserData(uint8_t* username, uint8_t* dstBuffer)
 void UD_getUserPassword(uint8_t* username, uint8_t* dstBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
-    strcpy(dstBuffer, profile.password);
+    strcpy(dstBuffer, profile.userLogin.password);
 }
