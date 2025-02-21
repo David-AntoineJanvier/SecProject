@@ -75,7 +75,7 @@ bool UD_changeUserPassword(uint8_t* username, uint8_t* newPassword)
 {
     bool done = true;
     ProfileData_t profile = *(findProfile(username));
-    strcpy(&(profile.userLogin.password), newPassword);
+    strcpy(profile.userLogin.password, newPassword);
 
     return done;
 }
@@ -84,7 +84,7 @@ bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck)
 {
     bool granted = false;
     ProfileData_t profile = *(findProfile(userToCheck->username));
-    if (strcmp(&(profile.userLogin.password), userToCheck->password) == 0)
+    if (strcmp(profile.userLogin.password, userToCheck->password) == 0)
         granted = true;
 
     return granted;
@@ -93,11 +93,17 @@ bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck)
 void UD_addUserData(uint8_t* username, uint8_t* dataBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
-    strcpy(&(profile.data), dataBuffer);
+    strcpy(profile.data, dataBuffer);
 }
 
 void UD_getUserData(uint8_t* username, uint8_t* dstBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
-    strcpy(dstBuffer, &(profile.data));
+    strcpy(dstBuffer, profile.data);
+}
+
+void UD_getUserPassword(uint8_t* username, uint8_t* dstBuffer)
+{
+    ProfileData_t profile = *(findProfile(username));
+    strcpy(dstBuffer, profile.password);
 }

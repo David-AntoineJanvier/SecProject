@@ -30,6 +30,7 @@ bool UD_changeUserPassword(uint8_t* username, uint8_t* newPassword);
 bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck);
 void UD_addUserData(uint8_t* username, uint8_t* dataBuffer);
 void UD_getUserData(uint8_t* username, uint8_t* dstBuffer);
+void UD_getUserPassword(uint8_t* username, uint8_t* dstBuffer);
 /*----- Functions declaration End -----*/
 
 
