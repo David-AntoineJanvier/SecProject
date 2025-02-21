@@ -5,6 +5,7 @@ int main()
 {
     AuthentificationParameters_t heyKracko = {.username = "kaobilin", .password = "before"};
     UD_addUser(&heyKracko);
+    UD_addUserData(heyKracko.username, "1234");
     printf("%s\n", heyKracko.password);
     UD_changeUserPassword(heyKracko.username, "changed");
     char newPassword[PASSWORD_LENGTH];
