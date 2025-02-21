@@ -1,6 +1,7 @@
 #include  "user_data.h"
 
 /* Private includes */
+#include <string.h>
 
 /* Private defines */
 #define MAX_USER_NUMBER 5
