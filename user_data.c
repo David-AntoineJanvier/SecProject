@@ -10,7 +10,7 @@
 typedef struct
 {
     AuthentificationParameters_t userLogin;
-    uint8_t data[DATA_LENGTH];
+    char data[DATA_LENGTH];
 } ProfileData_t;
 
 /* Private variables */
@@ -19,7 +19,7 @@ ProfileData_t database[MAX_USER_NUMBER] = {0};
 bool userTaken[MAX_USER_NUMBER] = {0};
 
 /* Private functions */
-ProfileData_t* findProfile(uint8_t* username)
+ProfileData_t* findProfile(char* username)
 {
     ProfileData_t* profile = NULL;
     for (int i = 0; i < MAX_USER_NUMBER; ++i)
@@ -52,7 +52,7 @@ bool UD_addUser(AuthentificationParameters_t* newUser)
     return done;
 }
 
-bool UD_deleteUser(uint8_t* username)
+bool UD_deleteUser(char* username)
 {
     bool done = false;
 
@@ -71,7 +71,7 @@ bool UD_deleteUser(uint8_t* username)
 }
 
 // findProfile can easily return null, but we want to showcase nullptr access
-bool UD_changeUserPassword(uint8_t* username, uint8_t* newPassword)
+bool UD_changeUserPassword(char* username, char* newPassword)
 {
     bool done = true;
     ProfileData_t profile = *(findProfile(username));
@@ -90,19 +90,19 @@ bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck)
     return granted;
 }
 
-void UD_addUserData(uint8_t* username, uint8_t* dataBuffer)
+void UD_addUserData(char* username, char* dataBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
     strcpy(profile.data, dataBuffer);
 }
 
-void UD_getUserData(uint8_t* username, uint8_t* dstBuffer)
+void UD_getUserData(char* username, char* dstBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
     strcpy(dstBuffer, profile.data);
 }
 
-void UD_getUserPassword(uint8_t* username, uint8_t* dstBuffer)
+void UD_getUserPassword(char* username, char* dstBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
     strcpy(dstBuffer, profile.userLogin.password);

@@ -15,8 +15,8 @@
 
 typedef struct
 {
-    uint8_t username[USERNAME_LENGTH];
-    uint8_t password[PASSWORD_LENGTH];
+    char username[USERNAME_LENGTH];
+    char password[PASSWORD_LENGTH];
 } AuthentificationParameters_t;
 
 /*----- Structures and types End -----*/
@@ -24,13 +24,13 @@ typedef struct
 
 /*----- Functions declaration -----*/
 bool UD_addUser(AuthentificationParameters_t* newUser);
-bool UD_deleteUser(uint8_t* username);
-bool UD_changeUserPassword(uint8_t* username, uint8_t* newPassword);
+bool UD_deleteUser(char* username);
+bool UD_changeUserPassword(char* username, char* newPassword);
 
 bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck);
-void UD_addUserData(uint8_t* username, uint8_t* dataBuffer);
-void UD_getUserData(uint8_t* username, uint8_t* dstBuffer);
-void UD_getUserPassword(uint8_t* username, uint8_t* dstBuffer);
+void UD_addUserData(char* username, char* dataBuffer);
+void UD_getUserData(char* username, char* dstBuffer);
+void UD_getUserPassword(char* username, char* dstBuffer);
 /*----- Functions declaration End -----*/
 
 
