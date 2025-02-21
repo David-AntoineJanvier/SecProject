@@ -3,6 +3,7 @@
 
 int main()
 {
+    AuthentificationParameters_t heyKracko = {.username = "kaobilin", .password = "tehehehe"};
     printf("Hello, world!\n");
     return 0;
 }
