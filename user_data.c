@@ -27,6 +27,7 @@ ProfileData_t* findProfile(uint8_t* username)
         if (strcmp(database[i].userLogin.username, username) == 0)
         {
             profile = &(database[i]);
+            break;
         }
     }
 
@@ -44,6 +45,7 @@ bool UD_addUser(AuthentificationParameters_t* newUser)
             userTaken[i] = 1;
             memcpy(&(database[i].userLogin), newUser, sizeof(AuthentificationParameters_t));
             done = true;
+            break;
         }
     }
 
@@ -61,6 +63,7 @@ bool UD_deleteUser(uint8_t* username)
             userTaken[i] == 0;
             memset(&(database[i]), 0, sizeof(ProfileData_t));
             done = true;
+            break;
         }
     }
 
