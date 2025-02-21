@@ -19,19 +19,13 @@ typedef struct
     uint8_t password[PASSWORD_LENGTH];
 } AuthentificationParameters_t;
 
-typedef struct
-{
-    AuthentificationParameters_t userLogin;
-    uint8_t data[DATA_LENGTH];
-} ProfileData_t;
-
 /*----- Structures and types End -----*/
 
 
 /*----- Functions declaration -----*/
 bool UD_addUser(AuthentificationParameters_t* newUser);
 bool UD_deleteUser(uint8_t* username);
-bool UD_changeUserPassword(uint8_t* username);
+bool UD_changeUserPassword(uint8_t* username, uint8_t* newPassword);
 
 bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck);
 void UD_addUserData(uint8_t* username, uint8_t* dataBuffer);
