@@ -75,7 +75,7 @@ bool UD_changeUserPassword(char* username, char* newPassword)
 {
     bool done = true;
     ProfileData_t profile = *(findProfile(username));
-    strcpy(profile.userLogin.password, newPassword);
+    strcpy(&(profile.userLogin.password), newPassword);
 
     return done;
 }
@@ -93,7 +93,7 @@ bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck)
 void UD_addUserData(char* username, char* dataBuffer)
 {
     ProfileData_t profile = *(findProfile(username));
-    strcpy(profile.data, dataBuffer);
+    strcpy(&(profile.data), dataBuffer);
 }
 
 void UD_getUserData(char* username, char* dstBuffer)
