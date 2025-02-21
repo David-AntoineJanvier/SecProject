@@ -10,7 +10,7 @@
 typedef struct
 {
     AuthentificationParameters_t userLogin;
-    char data[DATA_LENGTH];
+    char data[DATA_LENGTH+1];
 } ProfileData_t;
 
 /* Private variables */

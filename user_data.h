@@ -15,8 +15,8 @@
 
 typedef struct
 {
-    char username[USERNAME_LENGTH];
-    char password[PASSWORD_LENGTH];
+    char username[USERNAME_LENGTH+1];
+    char password[PASSWORD_LENGTH+1];
 } AuthentificationParameters_t;
 
 /*----- Structures and types End -----*/
