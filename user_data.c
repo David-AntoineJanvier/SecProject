@@ -18,21 +18,6 @@ typedef struct
 ProfileData_t database[MAX_USER_NUMBER] = {0};
 bool userTaken[MAX_USER_NUMBER] = {0};
 
-/* Private functions */
-ProfileData_t* findProfile(uint8_t* username)
-{
-    ProfileData_t* profile = NULL;
-    for (int i = 0; i < MAX_USER_NUMBER; ++i)
-    {
-        if (strcmp(database[i].userLogin.username, username) == 0)
-        {
-            profile = &(database[i]);
-        }
-    }
-
-    return profile;
-}
-
 /* Public functions */
 bool UD_addUser(AuthentificationParameters_t* newUser)
 {
