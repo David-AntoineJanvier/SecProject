@@ -98,12 +98,12 @@ void UD_addUserData(char* username, char* dataBuffer)
 
 void UD_getUserData(char* username, char* dstBuffer)
 {
-    ProfileData_t profile = *findProfile(username);
+    ProfileData_t profile = *(findProfile(username));
     strcpy(dstBuffer, profile.data);
 }
 
 void UD_getUserPassword(char* username, char* dstBuffer)
 {
-    ProfileData_t profile = *findProfile(username);
+    ProfileData_t profile = *(findProfile(username));
     strcpy(dstBuffer, profile.userLogin.password);
 }
