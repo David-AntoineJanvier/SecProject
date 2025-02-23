@@ -18,7 +18,7 @@ void auth_init() {
 }
 
 bool auth_checkUser(AuthentificationParameters_t authParams) {
-    return UD_isAccessGranted(*authParams.username, *authParams.password);
+    return UD_isAccessGranted(&authParams);
 }
 
 AuthentificationParameters_t auth_login(){
