@@ -31,7 +31,7 @@ void auth_init(void);
 AuthentificationParameters_t auth_login();
 
 
-bool auth_checkUser(const char* username, const char* password);
+bool auth_checkUser(AuthentificationParameters_t authParams);
 
 
 /*----- Functions declaration End -----*/

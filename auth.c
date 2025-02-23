@@ -6,13 +6,19 @@
 
 
 void auth_init() {
-    
-    
+    AuthentificationParameters_t test = {.username = "kaobilin", .password = "before\0"};
+    AuthentificationParameters_t test2 = {.username = "test", .password = "test\0"};
+    AuthentificationParameters_t test3 = {.username = "admin", .password = "passwordadmin\0"};
+    AuthentificationParameters_t test4 = {.username = "user", .password = "password\0"};
+
+    UD_addUser(&test);
+    UD_addUser(&test2);
+    UD_addUser(&test3);
+    UD_addUser(&test4);
 }
 
-bool auth_checkUser(const char *username, const char *password) {
-    // Check if the username and password match any of the stored users
-
+bool auth_checkUser(AuthentificationParameters_t authParams) {
+    return UD_isAccessGranted(authParams.username, authParams.password);
 }
 
 AuthentificationParameters_t auth_login(){

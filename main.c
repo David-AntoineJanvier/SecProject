@@ -4,6 +4,7 @@
 
 int main()
 {
+    auth_init();
     printf("Bienvenu dans le super systeme de collection des donnée ultra securitaire !\n\n");
     printf("Veuillez vous authentifier pour acceder au systeme.\n");
     AuthentificationParameters_t test = auth_login();
