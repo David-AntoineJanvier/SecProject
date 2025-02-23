@@ -9,6 +9,12 @@ int main()
     printf("Veuillez vous authentifier pour acceder au systeme.\n");
     AuthentificationParameters_t test = auth_login();
     printf("Vous essayer de vous connecte en tant que %s.\n", test.username);
+    if (auth_checkUser(test)){
+        printf("Vous etes bien authentifie.\n");
+    } else {
+        printf("Erreur d'authentification.\n");
+    }
+
 
 
 
