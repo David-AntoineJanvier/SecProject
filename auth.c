@@ -10,7 +10,7 @@ void auth_init() {
     
 }
 
-uint8_t auth_checkUser(char *username, char *password) {
+bool auth_checkUser(char *username, char *password) {
     // Check if the username and password match any of the stored users
 
 }
