@@ -27,10 +27,10 @@ AuthentificationParameters_t auth_login(){
     char bufpasswrd[16];
     printf("Username: ");
 
-    fgets(bufusrname, 8, stdin);
+    scanf("%s", bufusrname);
 
     printf("Password: ");
-    fgets(bufpasswrd, 16, stdin);
+    scanf("%s", bufpasswrd);
 
     strcpy(params.username, bufusrname);
     strcpy(params.password, bufpasswrd);
