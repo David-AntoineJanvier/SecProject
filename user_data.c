@@ -83,10 +83,11 @@ bool UD_changeUserPassword(char* username, char* newPassword)
 bool UD_isAccessGranted(AuthentificationParameters_t* userToCheck)
 {
     bool granted = false;
-    ProfileData_t profile = *(findProfile(userToCheck->username));
-    if (strcmp(profile.userLogin.password, userToCheck->password) == 0)
-        granted = true;
-
+    for (int i = 0; i < MAX_USER_NUMBER; ++i)
+	{
+    	if (strcmp(database[i].userLogin.password, userToCheck->password) == 0)
+        	granted = true;
+	}
     return granted;
 }
 

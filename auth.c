@@ -1,9 +1,7 @@
 #include "auth.h"
-#include "user_data.h"
 
-#include <stdio.h>
 #include <string.h>
-
+#include <stdio.h>
 
 void auth_init() {
     AuthentificationParameters_t test = {.username = "kaobilin", .password = "before\0"};
@@ -23,8 +21,8 @@ bool auth_checkUser(AuthentificationParameters_t authParams) {
 
 AuthentificationParameters_t auth_login(){
     AuthentificationParameters_t params;
-    char bufusrname[8];
-    char bufpasswrd[16];
+    char bufusrname[USERNAME_LENGTH + 1];
+    char bufpasswrd[PASSWORD_LENGTH + 1];
     printf("Username: ");
 
     scanf("%s", bufusrname);

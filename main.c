@@ -7,24 +7,38 @@ int main()
     auth_init();
     printf("Bienvenu dans le super systeme de collection des donnée ultra securitaire !\n\n");
     printf("Veuillez vous authentifier pour acceder au systeme.\n");
-    AuthentificationParameters_t test = auth_login();
-    printf("Vous essayer de vous connecte en tant que %s.\n", test.username);
-    if (auth_checkUser(test)){
-        printf("Vous etes bien authentifie.\n");
-    } else {
-        printf("Erreur d'authentification.\n");
+	int flag;
+
+	while(1)
+	{
+		AuthentificationParameters_t loginInfo = auth_login();
+	    printf("Vous essayer de vous connecte en tant que %s.\n", loginInfo.username);
+    	if (auth_checkUser(loginInfo))
+		{
+        	printf("Vous etes bien authentifie.\n");
+			char privateData[DATA_LENGTH];
+			printf("Data? :)\n");
+			scanf("%d", &flag);
+			if (flag)
+			{
+				printf("Enter please\n");
+				scanf("%s", privateData);
+				UD_addUserData(loginInfo.username, privateData);
+				printf("Data Added!\n");
+			}
+			else
+			{
+				char recoverData[DATA_LENGTH+1];
+				UD_getUserData(loginInfo.username, recoverData);
+				printf("Your private data is %s\n", recoverData);
+			}
+    	}
+		else
+		{
+        	printf("Erreur d'authentification.\n");
+		}
     }
 
 
-
-
-    /*
-    AuthentificationParameters_t heyKracko = {.username = "kaobilin", .password = "before\0"};
-    UD_addUser(&heyKracko);
-    printf("%s\n", heyKracko.password);
-    UD_changeUserPassword(heyKracko.username, "changed\0");
-    char newPassword[PASSWORD_LENGTH];
-    UD_getUserPassword(heyKracko.username, newPassword);
-    printf("%s\n", newPassword);*/
     return 0;
 }
