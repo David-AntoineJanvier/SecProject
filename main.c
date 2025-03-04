@@ -6,37 +6,57 @@ int main()
 {
     auth_init();
     printf("Bienvenu dans le super systeme de collection des donnée ultra securitaire !\n\n");
-    printf("Veuillez vous authentifier pour acceder au systeme.\n");
-	int flag;
+	int user_menu_choice;
+	int logout_flag = 0;
 
 	while(1)
 	{
+		printf("Veuillez vous authentifier pour acceder au systeme.\n");
 		AuthentificationParameters_t loginInfo = auth_login();
 	    printf("Vous essayer de vous connecte en tant que %s.\n", loginInfo.username);
     	if (auth_checkUser(loginInfo))
 		{
         	printf("Vous etes bien authentifie.\n");
 			char privateData[DATA_LENGTH];
-			printf("Data? :)\n");
-			scanf("%d", &flag);
-			if (flag)
-			{
-				printf("Enter please\n");
-				scanf("%s", privateData);
-				UD_addUserData(loginInfo.username, privateData);
-				printf("Data Added!\n");
-			}
-			else
-			{
-				char recoverData[DATA_LENGTH+1];
-				UD_getUserData(loginInfo.username, recoverData);
-				printf("Your private data is %s\n", recoverData);
-			}
-    	}
+
+
+			while (1){
+				printf("\r\n");
+				printf("  1 - New data \r\n");
+				printf("  2 - View private data\r\n");
+				printf("  0 - logout\r\n");
+				scanf("%d", &user_menu_choice);
+
+				switch(user_menu_choice){
+					case 1:
+						printf("\r\nEnter the data you want to add : \r\n");
+						scanf("%s", privateData);
+						UD_addUserData(loginInfo.username, privateData);
+						printf("Data Added!\n");
+						break;
+
+					case 2 :
+						char recoverData[DATA_LENGTH+1];
+						UD_getUserData(loginInfo.username, recoverData);
+						printf("Your private data is: %s\n", recoverData);
+						break;
+
+					case 0:
+						printf("Logout successful\r\n");
+						logout_flag =1;
+						break;
+					default :
+						printf("Invalid option\r\n");
+						break;
+				}//switch
+				if(logout_flag) break;
+			}//while
+		}
 		else
 		{
         	printf("Erreur d'authentification.\n");
 		}
+		logout_flag = 0;
     }
 
 

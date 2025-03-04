@@ -1,0 +1,22 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: Build all files",
+            "command": "C:\\msys64\\usr\\bin\\sh.exe",
+            "args": [
+                "-c",
+                "\"C:/msys64/mingw64/bin/gcc.exe -fdiagnostics-color=always -g *.c -o ./executable/output.exe\""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
