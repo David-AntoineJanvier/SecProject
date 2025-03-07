@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 /*----- Defines -----*/
-#define USERNAME_LENGTH 8
+#define USERNAME_LENGTH 32
 #define PASSWORD_LENGTH 16
 #define DATA_LENGTH     24
 /*----- Defines End -----*/
