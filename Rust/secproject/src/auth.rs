@@ -1,22 +1,28 @@
 use crate::user_data;
 use std::io::{self, Write};
 
+#[derive(Debug, Clone)]
+pub struct AuthenticationParameters {
+    pub username: String,
+    pub password: String,
+}
+
 pub fn auth_init() -> bool {
-    let local1 = user_data::AuthenticationParameters {
-        username: "Admin".to_owned(),
-        password: "password".to_owned(),
+    let local1 = AuthenticationParameters {
+        username: "Admin".to_string(),
+        password: "password".to_string(),
     };
-    let local2 = user_data::AuthenticationParameters {
-        username: "test".to_owned(),
-        password: "test".to_owned(),
+    let local2 = AuthenticationParameters {
+        username: "test".to_string(),
+        password: "test".to_string(),
     };
-    let local3 = user_data::AuthenticationParameters {
-        username: "Hello".to_owned(),
-        password: "World".to_owned(),
+    let local3 = AuthenticationParameters {
+        username: "Hello".to_string(),
+        password: "World".to_string(),
     };
-    let local4 = user_data::AuthenticationParameters {
-        username: "user".to_owned(),
-        password: "password".to_owned(),
+    let local4 = AuthenticationParameters {
+        username: "user".to_string(),
+        password: "password".to_string(),
     };
 
     user_data::ud_add_user(&local1);
@@ -24,17 +30,18 @@ pub fn auth_init() -> bool {
     user_data::ud_add_user(&local3);
     user_data::ud_add_user(&local4);
 
-    return true;
+    true
 }
-pub fn auth_check_user(auth_params: user_data::AuthenticationParameters) -> bool {
+pub fn auth_check_user(auth_params: AuthenticationParameters) -> bool {
     return user_data::ud_is_access_granted(auth_params);
 }
 pub fn db_auth_check_user() -> bool {
     println!("pas implementer gang de rat");
-    return true;
+
+    true
 }
 
-pub fn auth_login() -> user_data::AuthenticationParameters {
+pub fn auth_login() -> AuthenticationParameters {
     let mut username = String::new();
     let mut password = String::new();
     print!("Username: ");
@@ -43,8 +50,9 @@ pub fn auth_login() -> user_data::AuthenticationParameters {
     print!("Password: ");
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut password).expect("Failed to read line");
-    return user_data::AuthenticationParameters {
-        username: username.trim_end_matches('\n').to_owned(),
-        password: password.trim_end_matches('\n').to_owned(),
-    };
+
+    AuthenticationParameters {
+        username: username.trim_end_matches('\n').to_string(),
+        password: password.trim_end_matches('\n').to_string(),
+    }
 }
