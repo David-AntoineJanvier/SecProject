@@ -11,24 +11,20 @@ pub struct ProfileData
 
 static mut DATABASE : Vec<ProfileData> = Vec::new();
 
-fn find_profile(username: String, dst: &mut ProfileData) -> bool
+fn find_profile(username: &String, dst: &mut ProfileData) -> bool
 {
     let mut success = false;
-    println!("{}\n", username);
     unsafe
     {
         for profile in DATABASE.iter()
         {
-            println!("{}", profile.user_login.username);
-            if profile.user_login.username == username
+            if profile.user_login.username.trim() == username.trim()
             {
                 success = true;
                 *dst = profile.clone();
-                println!("{}", dst.user_login.username);
             }
         }
     }
-
     success
 }
 
@@ -47,41 +43,46 @@ pub fn ud_add_user(user: &auth::AuthenticationParameters) -> bool
     success
 }
 
-pub fn ud_is_access_granted(auth_params: auth::AuthenticationParameters) -> bool 
+pub fn ud_is_access_granted(auth_params: &auth::AuthenticationParameters) -> bool 
 {
     let mut success = false;
-    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"tmp".to_string(), password:"tmp".to_string()},
-                                        data:"tmp".to_string()};
-    let found = find_profile(auth_params.username, &mut user_profile);
+    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"dbg".to_string(), password:"dbg".to_string()},
+                                        data:"dbg".to_string()};
+    let found = find_profile(&(auth_params.username), &mut user_profile);
     if found
     {
-        success = auth_params.password.eq(&(user_profile.user_login.password));
+        success = auth_params.password.trim() == user_profile.user_login.password.trim();
     }
 
     success
 }
 
-pub fn ud_add_user_data(username: String, data_buffer: String) 
+pub fn ud_add_user_data(username: &String, data_buffer: String) 
 {
-    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"tmp".to_string(), password:"tmp".to_string()},
-                                        data:"tmp".to_string()};
-    let found = find_profile(username, &mut user_profile);
+    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"dbg".to_string(), password:"dbg".to_string()},
+                                        data:"dbg".to_string()};
+    let found = find_profile(&username, &mut user_profile);
     if found
     {
-        user_profile.data = data_buffer;
+        user_profile.data = data_buffer.trim().to_string().clone();
+        unsafe
+        {
+            let index = DATABASE.iter().position(|x| x.user_login.username.trim() == username.trim()).unwrap();
+            DATABASE[index] = user_profile;
+        }
     }
 }
 
-pub fn ud_get_user_data(username: String) -> String
+pub fn ud_get_user_data(username: &String) -> String
 {
-    let mut returnString = "".to_string();
-    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"tmp".to_string(), password:"tmp".to_string()},
-                                        data:"tmp".to_string()};
-    let found = find_profile(username, &mut user_profile);
+    let mut return_string = "".to_string();
+    let mut user_profile = ProfileData{user_login:auth::AuthenticationParameters{username:"dbg".to_string(), password:"dbg".to_string()},
+                                        data:"dbg".to_string()};
+    let found = find_profile(&username, &mut user_profile);
     if found
     {
-        returnString = user_profile.data;
+        return_string = user_profile.data;
     }
 
-    returnString
+    return_string
 }

@@ -8,40 +8,73 @@ fn main() {
     auth::auth_init();
     println!("");
     println!("Bienvenue dans le super systeme de collection des donnees ultra securitaire !\n\n");
-    
-    let mut choice = false;
 
-    while !choice{
+    loop
+    {
         println!("Choisissez votre mode :\n");
         println!("1 - Mode local\n");
         println!("2 - Mode SQL (base de donnees)\n");
-        println!("0 - EXIT\n");
 
         let mut buf = String::new();
         io::stdin().read_line(&mut buf).expect("Failed to read line");
-        let mode_choice: i32 = buf.trim().parse().expect("Please enter an integer");
+        let mut mode_choice: i32 = buf.trim().parse().expect("Please enter an integer");
+        buf.clear();
 
 
-        if mode_choice == 0 {
-            println!("EXIT SUCCESSFUL");
-            std::process::exit(0);
-        }
-        else if mode_choice == 1 {
-            println!("Veuillez vous authentifier pour acceder au systeme local.\n");
-            let auth_params: auth::AuthenticationParameters = auth::auth_login();
-            if auth::auth_check_user(auth_params){
-                println!("Vous etes bien authentifie.");
+        match mode_choice
+        {
+            1 =>
+            {
+                println!("Veuillez vous authentifier pour acceder au systeme local.\n");
+                let auth_params: auth::AuthenticationParameters = auth::auth_login();
+                if auth::auth_check_user(&auth_params)
+                {
+                    println!("Vous etes bien authentifie.");
+                    loop
+                    {
+                        println!("\nChoisissez votre action :\n");
+                        println!("1 - Insérer vos données\n");
+                        println!("2 - Lire vos données\n");
+
+                        io::stdin().read_line(&mut buf).expect("Failed to read line");
+                        mode_choice = buf.trim().parse().expect("Please enter an integer");
+                        buf.clear();
+                        match mode_choice
+                        {
+                            1 =>
+                            {
+                                println!("Entrez vos données: ");
+                                let mut data = String::new();
+                                io::stdin().read_line(&mut data).expect("Failed to read line");
+                                user_data::ud_add_user_data(&(auth_params.username), data);
+                                println!("Données bien ajoutées!");
+                                break;
+                            },
+                            2 =>
+                            {
+                                let recovered_data = user_data::ud_get_user_data(&(auth_params.username));
+                                println!("Vos données sont: ");
+                                println!("{}", recovered_data);
+                                break;
+                            },
+                            _ => 
+                            {
+                                println!("Please enter a valid choice");
+                                break;
+                            }
+                        }
+                    }
+                }
+            },
+            2 =>
+            {
+                println!("Veuillez vous authentifier pour acceder à la base de données.\n");
+                println!("choice 1 pas implementer gang de rat");
+            },
+            _ =>
+            {
+                println!("Please enter a valid choice");
             }
-            choice = true;
-        }
-        else if mode_choice == 2 {
-            println!("Veuillez vous authentifier pour acceder à la base de données.\n");
-            println!("choice 1 pas implementer gang de rat");
-            choice = true;
-        }
-        else{
-            println!("Please enter a valid choice");
-
         }
     }
 }
