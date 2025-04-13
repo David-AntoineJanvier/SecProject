@@ -1,4 +1,5 @@
 use crate::user_data;
+use crate::db_connector;
 use std::io::{self, Write};
 
 #[derive(Debug, Clone)]
@@ -35,10 +36,9 @@ pub fn auth_init() -> bool {
 pub fn auth_check_user(auth_params: &AuthenticationParameters) -> bool {
     return user_data::ud_is_access_granted(auth_params);
 }
-pub fn db_auth_check_user() -> bool {
-    println!("pas implementer gang de rat");
 
-    true
+pub fn db_auth_check_user() -> bool {
+    return db_connector::db_is_access_granted(auth_params);
 }
 
 pub fn auth_login() -> AuthenticationParameters {
