@@ -10,7 +10,7 @@ fn establish_connection() -> Result<PooledConn, Box<dyn std::error::Error>> {
     Ok(conn)
 }
 
-fn db_is_access_granted(auth: AuthenticationParameters) -> bool {
+pub fn db_is_access_granted(auth: &AuthenticationParameters) -> bool {
     match establish_connection() {
         Ok(mut conn) => {
             // 👇 This is dangerous: direct string interpolation

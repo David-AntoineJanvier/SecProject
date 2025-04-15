@@ -37,7 +37,7 @@ pub fn auth_check_user(auth_params: &AuthenticationParameters) -> bool {
     return user_data::ud_is_access_granted(auth_params);
 }
 
-pub fn db_auth_check_user() -> bool {
+pub fn db_auth_check_user(auth_params: &AuthenticationParameters) -> bool {
     return db_connector::db_is_access_granted(auth_params);
 }
 
